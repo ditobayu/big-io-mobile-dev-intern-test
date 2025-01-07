@@ -96,7 +96,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `characters` (`id` INTEGER, `name` TEXT, `status` TEXT, `species` TEXT, `type` TEXT, `gender` TEXT, `locationName` TEXT, `locationUrl` TEXT, `originName` TEXT, `originUrl` TEXT, `image` TEXT, `episode` TEXT, `url` TEXT, `created` TEXT, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `characters` (`id` INTEGER, `name` TEXT, `status` TEXT, `species` TEXT, `type` TEXT, `gender` TEXT, `locationName` TEXT, `locationUrl` TEXT, `originName` TEXT, `originUrl` TEXT, `image` TEXT, `episode` TEXT, `url` TEXT, `created` TEXT, `isFavorite` INTEGER, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -132,7 +132,10 @@ class _$CharacterDao extends CharacterDao {
                   'image': item.image,
                   'episode': _stringListConverter.encode(item.episode),
                   'url': item.url,
-                  'created': item.created
+                  'created': item.created,
+                  'isFavorite': item.isFavorite == null
+                      ? null
+                      : (item.isFavorite! ? 1 : 0)
                 }),
         _characterModelDeletionAdapter = DeletionAdapter(
             database,
@@ -152,7 +155,10 @@ class _$CharacterDao extends CharacterDao {
                   'image': item.image,
                   'episode': _stringListConverter.encode(item.episode),
                   'url': item.url,
-                  'created': item.created
+                  'created': item.created,
+                  'isFavorite': item.isFavorite == null
+                      ? null
+                      : (item.isFavorite! ? 1 : 0)
                 });
 
   final sqflite.DatabaseExecutor database;

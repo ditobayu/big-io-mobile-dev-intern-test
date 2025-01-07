@@ -32,30 +32,34 @@ class _FavoriteCharactersPageState extends State<FavoriteCharactersPage> {
           }),
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
-        child: BlocBuilder<LocalCharacterBloc, LocalCharacterState>(
-          builder: (context, state) {
-            if (state is LocalCharacterLoading) {
-              List<CharacterEntity> dummyCharacters =
-                  List.filled(16, dummyCharacter);
-              return CharaterList(
-                isFromFavoritePage: true,
-                isNeedFavoriteButton: false,
-                isLoading: true,
-                characters: dummyCharacters,
-              );
-            }
-            if (state is LocalCharacterLoaded) {
-              return CharaterList(
-                isFromFavoritePage: true,
-                isNeedFavoriteButton: false,
-                isLoading: false,
-                characters: state.characters,
-              );
-            }
-            return const Center(
-              child: Text('Favorite Characters Page'),
-            );
-          },
+        child: Column(
+          children: [
+            BlocBuilder<LocalCharacterBloc, LocalCharacterState>(
+              builder: (context, state) {
+                if (state is LocalCharacterLoading) {
+                  List<CharacterEntity> dummyCharacters =
+                      List.filled(16, dummyCharacter);
+                  return CharaterList(
+                    isFromFavoritePage: true,
+                    isNeedFavoriteButton: false,
+                    isLoading: true,
+                    characters: dummyCharacters,
+                  );
+                }
+                if (state is LocalCharacterLoaded) {
+                  return CharaterList(
+                    isFromFavoritePage: true,
+                    isNeedFavoriteButton: false,
+                    isLoading: false,
+                    characters: state.characters,
+                  );
+                }
+                return const Center(
+                  child: Text('Favorite Characters Page'),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

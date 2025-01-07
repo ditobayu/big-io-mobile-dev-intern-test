@@ -1,3 +1,4 @@
+import 'package:adhitya/features/characters/data/data_sources/local/DAO/character_dao.dart';
 import 'package:adhitya/features/characters/data/data_sources/local/app_database.dart';
 import 'package:adhitya/features/characters/data/data_sources/remote/character_api_service.dart';
 import 'package:adhitya/features/characters/domain/repository/character_repository.dart';
@@ -6,7 +7,13 @@ import 'package:dio/dio.dart';
 import 'package:mockito/annotations.dart';
 
 @GenerateMocks(
-  [CharacterRepository, CharacterApiService, AppDatabase, GetCharactersUseCase],
+  [
+    CharacterRepository,
+    CharacterApiService,
+    AppDatabase,
+    CharacterDao,
+    GetCharactersUseCase
+  ],
   customMocks: [MockSpec<Dio>(as: #MockDioClient)],
 )
 void main() {}
