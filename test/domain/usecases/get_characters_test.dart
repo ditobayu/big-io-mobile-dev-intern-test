@@ -51,7 +51,7 @@ void main() {
   const gender = "character.gender";
   const page = 1;
 
-  test('should get characters from the repository', () async {
+  test('should get list of characters from the remote repository', () async {
     // arrange
     when(
       mockCharacterRepository.getCharacters(

@@ -40,7 +40,8 @@ void main() {
     )
   ];
 
-  test('should get characters from the local database', () async {
+  test('should get list of favorite characters from the local database',
+      () async {
     final tCharacters =
         characterList.map((e) => CharacterModel.fromEntity(e)).toList();
     // arrange
